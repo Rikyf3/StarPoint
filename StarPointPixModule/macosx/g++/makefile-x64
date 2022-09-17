@@ -1,0 +1,75 @@
+######################################################################
+# PixInsight Makefile Generator Script v1.126
+# Copyright (C) 2009-2022 Pleiades Astrophoto
+######################################################################
+# Generated on .... 2022-05-17T19:53:37.731Z
+# Project id ...... StarPoint
+# Project type .... Module
+# Platform ........ MacOSX/g++
+# Configuration ... Release/x64
+# --------------------------------------------------------------------
+# Additional libraries:
+# tensorflow
+# tensorflow_framework
+######################################################################
+
+OBJ_DIR="$(PCLSRCDIR)/modules/processes/StarPoint/macosx/g++/x64/Release"
+
+.PHONY: all
+all: $(OBJ_DIR)/StarPoint-pxm.dylib
+
+#
+# Source files
+#
+
+SRC_FILES= \
+../../StarPointInstance.cpp \
+../../StarPointInterface.cpp \
+../../StarPointModule.cpp \
+../../StarPointParameters.cpp \
+../../StarPointProcess.cpp
+
+#
+# Object files
+#
+
+OBJ_FILES= \
+./x64/Release/StarPointInstance.o \
+./x64/Release/StarPointInterface.o \
+./x64/Release/StarPointModule.o \
+./x64/Release/StarPointParameters.o \
+./x64/Release/StarPointProcess.o
+
+#
+# Dependency files
+#
+
+DEP_FILES= \
+./x64/Release/StarPointInstance.d \
+./x64/Release/StarPointInterface.d \
+./x64/Release/StarPointModule.d \
+./x64/Release/StarPointParameters.d \
+./x64/Release/StarPointProcess.d
+
+#
+# Rules
+#
+
+-include $(DEP_FILES)
+
+$(OBJ_DIR)/StarPoint-pxm.dylib: $(OBJ_FILES)
+	clang++ -arch x86_64 -fPIC -headerpad_max_install_names -Wl,-syslibroot,/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -mmacosx-version-min=10.15 -stdlib=libc++ -Wl,-dead_strip -rdynamic -dynamiclib -install_name @executable_path/StarPoint-pxm.dylib -L"$(PCLLIBDIR64)" -o $(OBJ_DIR)/StarPoint-pxm.dylib $(OBJ_FILES) -framework CoreFoundation -lpthread -lPCL-pxi -llz4-pxi -lzlib-pxi -lRFC6234-pxi -llcms-pxi -lcminpack-pxi -ltensorflow -ltensorflow_framework
+	$(MAKE) -f ./makefile-x64 --no-print-directory post-build
+
+.PHONY: clean
+clean:
+	rm -f $(OBJ_FILES) $(DEP_FILES) $(OBJ_DIR)/StarPoint-pxm.dylib
+
+.PHONY: post-build
+post-build:
+	cp $(OBJ_DIR)/StarPoint-pxm.dylib $(PCLBINDIR64)
+	codesign --deep --options=runtime -s pleiades -f -v --timestamp $(PCLBINDIR64)/StarPoint-pxm.dylib
+
+./x64/Release/%.o: ../../%.cpp
+	clang++ -c -pipe -pthread -arch x86_64 -fPIC -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -mmacosx-version-min=10.15 -D_REENTRANT -D__PCL_MACOSX -I"$(PCLINCDIR)" -I"$(PCLSRCDIR)/3rdparty" -mtune=skylake -msse4.2 -minline-all-stringops -O3 -ffunction-sections -fdata-sections -ffast-math -fvisibility=hidden -fvisibility-inlines-hidden -std=c++17 -stdlib=libc++ -Wall -Wno-parentheses -Wno-extern-c-compat -MMD -MP -MF"$(@:%.o=%.d)" -o"$@" "$<"
+	@echo ' '
