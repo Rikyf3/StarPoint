@@ -5,6 +5,8 @@
 ## Why we need it?
 In astrophotography star reduction is a tecnique widely used to reduce star impact on the image helping to bring out more structure and nebulosity. Typical tecniques require much trial and error and gives little control on star profile. Nonetheless they usually produce artifacts around stars.
 
+<img src="[https://your-image-url.type](https://user-images.githubusercontent.com/27781906/191211508-44cbe457-43d1-452d-bc3f-d8d7669e8d3c.png)" height="300">
+
 Where others star reduction procedures try to erode stars using different types of filters, **StarPoint takes all of a different route**. At the cost of an increase in computational power used, every single star in an image is modelled as a gaussian profile, giving access to modifily not only variance along each axis, but also rotation, position and brightness of each star independentely. This makes possible not only to reduce star size, but also to remove cromatic aberration and correct small tracking error that creates not perfectly round stars.
 
 ## Usage in PixInsight
