@@ -20,4 +20,4 @@ StarPoint takes a star mask and returns a modified version of it.
 
 ## Self-supervision: a cost effective approach to AI
 In contrary to many other method of traning a neural network StarPoint uses a tecnique called **self-supervision**. The traning dataset of StarPoint is completely synthetic. For every training step a number of gaussian parameters (variance, rotation, amplitude, position, ...) are generated randomly. The input of the CNN is the renderning of that paramenters onto images and the output is the parameters themselves.
-This approach does not require any pre existing dataset of images reducing the overall cost and time spent on the project. Another advantage is that if an issue occurs, for example star of big size are not correctly parametrized by the AI, it is quite easy to solve the problem.
+This approach does not require any pre existing dataset of images reducing the overall cost and time spent. Another advantage is that if an issue occurs, for example star of big size are not correctly parametrized by the AI, it is quite easy to solve the problem.
