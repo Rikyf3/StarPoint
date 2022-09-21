@@ -213,11 +213,14 @@ public:
 
                         x_mean = i + DOWNSAMPLE*u + Floor( int( DOWNSAMPLE * GetMeanOverChannels( y_fine, u, v ) ) );
                         y_mean = j + DOWNSAMPLE*v + Floor( int( DOWNSAMPLE * GetMeanOverChannels( x_fine, u, v ) ) );
-                        bbox = 3 * (int) Ceil( Sqrt( MAX_STD * Max( Get( x_std, u, v, c ), Get( y_std, u, v, c ) ) ) );
+                        bbox = ( int ) 2.5 * Ceil( Sqrt( MAX_STD * Max( Get( x_std, u, v, c ), Get( y_std, u, v, c ) ) ) );
 
-                        for ( int x = Max( x_mean - bbox, 0 ); x < Min( x_mean + bbox, finalWidth ); ++x )
+                        if ( bbox < 2 )
+                           continue;
+
+                        for ( int x = Max( x_mean - bbox, 0 ); x < Min( x_mean + bbox, finalWidth ) + 1; ++x )
                         {
-                           for ( int y = Max( y_mean - bbox, 0 ); y < Min( y_mean + bbox, finalHeight ); ++y )
+                           for ( int y = Max( y_mean - bbox, 0 ); y < Min( y_mean + bbox, finalHeight ) + 1; ++y )
                            {
                               P::FromSample( temp, star_mask( x, y, c ) );
                               star_mask( x, y, c ) += P::ToSample(
@@ -346,7 +349,7 @@ private:
 
    static float Gaussian( int pos_x, int pos_y, float amplitude, float x_mean,  float y_mean, float x_std, float y_std, float theta )
    {
-      x_std = MAX_STD * 0.5 * ( x_std + y_std );
+      x_std = MAX_STD * Max( x_std, y_std );
       y_std = x_std;
 
       theta = theta * 3.14F;
