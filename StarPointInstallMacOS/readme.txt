@@ -1,5 +1,6 @@
 Install procedure for MacOS
 
+0. Install StarNet++ (uses same version of tensorflow compiled without AVX)
 1. Copy simple_frozen_graph.pb in Applications/PixInsight/library/
 2. Copy StarPoint-pxm.dylib in Applications/PixInsight/bin/
 3. Open PixInsight
